@@ -53,15 +53,10 @@ public abstract class AbstractDiccionario implements Diccionario {
         Map<String, List<String>> terminos = terminosLeidos.entrySet().stream()
             .collect( Collectors.toMap(
                                             (me) ->   me.getKey().toString().toLowerCase(),
-                                            (me) ->   List.of(me.getValue().toString().split("|"))
+                                            (me) ->   List.of(me.getValue().toString().split("\\|"))
                                       ) );
                                       
-        terminosLeidos.entrySet().stream()
-            .forEach( 
-                                            (me) ->   System.out.println(me.getValue().toString().split(" ")[0])
-                                      );
-                                      
-        
+
         // key.toLowerCase()
         //value.split("|")-> Array textos -> List
         return terminos;
