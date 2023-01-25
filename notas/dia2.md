@@ -105,3 +105,16 @@ Iteración : SPRINT1: 15 de febrero : PASO A PRODUCCION
                 Cada 15 días hay que hacer PRUEBAS DE PRODUCCION !
                 Cada 15 días hay que hacer INSTALACION EN PRODUCCION !
                 
+                
+C1 -> map   ->  C2            
+1     x2        2
+3               6
+5               10
+7               14
+    (n) -> n*2
+    
+    
+C1          -> distanciaA(manzane) ->  C2
+manzana                                 TP1(1 , manzana )
+pera                                    TP2(7 , pera   )
+

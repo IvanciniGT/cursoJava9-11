@@ -1,5 +1,7 @@
 package com.curso.diccionario;
 
+import java.util.*;
+
 public interface Diccionario {
     
     boolean existe(String termino);

@@ -33,7 +33,7 @@ public abstract class AbstractDiccionario implements Diccionario {
         
         Properties terminosLeidos = new Properties();
         
-        String nombreFicheroConLosTerminos = "terminos/diccionario."+getIdioma()+".properties";
+        String nombreFicheroConLosTerminos = "diccionario."+getIdioma()+".properties";
         URL urlFicheroConLosTerminos = Objects.requireNonNull(getClass().getClassLoader().getResource(nombreFicheroConLosTerminos)); // Java 1.7
                                         // Me lanza un nullpointerException CONTROLADO POR MI, donde se lanza... no por ahí abajo
                                         // Que luego me vuelvo loco haciendo debuging
@@ -42,7 +42,7 @@ public abstract class AbstractDiccionario implements Diccionario {
         String ficheroConLosTerminos = urlFicheroConLosTerminos.getFile();
         
         try( FileReader fileReader=new FileReader(ficheroConLosTerminos) ) { // Debia implementar: Closeable
-            properties.load(fileReader);
+            terminosLeidos.load(fileReader);
         } catch(IOException e) {
             throw new RuntimeException(e); //OJO 
         }
@@ -50,16 +50,21 @@ public abstract class AbstractDiccionario implements Diccionario {
         //Melón=Fruto del melonero|Persona con pocos conocimientos
 
         // Streams                                      //Set<Map.Entry<String,String>>
-        Map<String, List<String>> terminos = properties.entrySet().stream()
+        Map<String, List<String>> terminos = terminosLeidos.entrySet().stream()
             .collect( Collectors.toMap(
-                                            (me) ->   me.getKey().toLowerCase(),
-                                            (me) ->   Arrays.asList(me.getValue().split("|")),
+                                            (me) ->   me.getKey().toString().toLowerCase(),
+                                            (me) ->   List.of(me.getValue().toString().split("|"))
                                       ) );
+                                      
+        terminosLeidos.entrySet().stream()
+            .forEach( 
+                                            (me) ->   System.out.println(me.getValue().toString().split(" ")[0])
+                                      );
                                       
         
         // key.toLowerCase()
         //value.split("|")-> Array textos -> List
-
+        return terminos;
     }
     
 }
