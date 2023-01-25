@@ -1,12 +1,14 @@
 package com.curso.diccionario.impl;
 
+import com.curso.diccionario.*;
+import java.util.stream.*;
 import java.util.*;
 import java.net.*;
 import java.io.*;
 
 public abstract class AbstractDiccionario implements Diccionario {
     
-    private final Map<String, List<String>> terminos;
+    protected final Map<String, List<String>> terminos;
     private final String idioma;
     
     public AbstractDiccionario(String idioma){
@@ -15,11 +17,11 @@ public abstract class AbstractDiccionario implements Diccionario {
     }
 
     public boolean existe(String termino){
-        
+        return terminos.containsKey(termino.toLowerCase());
     }
     
     public Optional<List<String>> getDefiniciones(String termino){
-        
+        return Optional.ofNullable(terminos.get(termino.toLowerCase()));
     }
     
     public String getIdioma(){
@@ -28,8 +30,6 @@ public abstract class AbstractDiccionario implements Diccionario {
     
     // Cargar la lista de términos desde un fichero
     private Map<String, List<String>> cargarTerminos() {
-        //manzana=Fruto del manzano
-        //melón=Fruto del melonero|Persona con pocos conocimientos
         
         Properties terminosLeidos = new Properties();
         
@@ -41,14 +41,25 @@ public abstract class AbstractDiccionario implements Diccionario {
         // ^^^ GENIAL... se carga a nivel de MODULO !
         String ficheroConLosTerminos = urlFicheroConLosTerminos.getFile();
         
-        try( FileReader fileReader=new FileReader(ficheroConLosTerminos) ) {
+        try( FileReader fileReader=new FileReader(ficheroConLosTerminos) ) { // Debia implementar: Closeable
             properties.load(fileReader);
         } catch(IOException e) {
             throw new RuntimeException(e); //OJO 
         }
+        //manzana=Fruto del manzano
+        //Melón=Fruto del melonero|Persona con pocos conocimientos
+
+        // Streams                                      //Set<Map.Entry<String,String>>
+        Map<String, List<String>> terminos = properties.entrySet().stream()
+            .collect( Collectors.toMap(
+                                            (me) ->   me.getKey().toLowerCase(),
+                                            (me) ->   Arrays.asList(me.getValue().split("|")),
+                                      ) );
+                                      
         
-        // Streams 
-        //properties. ----> map
+        // key.toLowerCase()
+        //value.split("|")-> Array textos -> List
+
     }
     
 }

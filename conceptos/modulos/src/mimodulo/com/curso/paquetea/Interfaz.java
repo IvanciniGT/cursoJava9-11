@@ -9,7 +9,7 @@ public interface Interfaz {
         return dameOtroTexto2();
     }
     
-    private static String dameOtroTexto2(){  // Esto es Java 1.8
+    private static String dameOtroTexto2(){  // Esto es Java 1.9
         return "Hola desde el Interfaz";
     }
     

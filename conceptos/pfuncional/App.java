@@ -20,6 +20,10 @@ public class App {
         // 27, dentro de la función: imprimir2
         // Desde JAVA 1.8, hay un operador nuevo ::
         // Este operador permite referenciar una función
+        
+        Function<Double, Double> funcion = App::doblar;
+        Function<Double, Double> funcion = (num) -> num*4;
+        
         imprimir2(App::doblar, 5);
         
         int numero = 7;
