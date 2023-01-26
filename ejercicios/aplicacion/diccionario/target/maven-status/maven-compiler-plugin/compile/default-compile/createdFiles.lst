@@ -1,0 +1,8 @@
+com/curso/diccionario/ProveedorDeDiccionarios.class
+module-info.class
+com/curso/diccionario/Diccionario.class
+com/curso/diccionario/impl/DiccionarioEspanol$TerminoPuntuado.class
+com/curso/diccionario/impl/ProveedorDeDiccionariosImpl.class
+com/curso/diccionario/impl/AbstractDiccionario.class
+com/curso/diccionario/impl/DiccionarioEspanol.class
+com/curso/diccionario/impl/LevenshteinDistance.class

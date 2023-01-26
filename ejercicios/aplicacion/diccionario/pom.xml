@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   
-  <artifactId>diccionario-core</artifactId>
+  <artifactId>diccionario</artifactId>
 
 
   <name>Motor del diccionario</name>
